@@ -15,6 +15,19 @@ boot:
     call print
     call print_line
 
+    mov bh, 0
+    mov bl, [disk]
+    call print_num
+    call print_line
+
+    mov ax, (startup_start - boot) / 512
+    mov bx, start_start
+    mov cx, (startup_end - startup_start) / 512
+    xor dx, dx
+    call load
+
+load:
+    cmp cx, 64
 
 %include "print16.asm"
 

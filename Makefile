@@ -1,6 +1,6 @@
 ARCH?=x86_64
 
-run:qemu
+run:clean qemu
 
 qemu: build/harddrive.bin
 	qemu-system-$(ARCH) -drive file=$<,format=raw,index=0,media=disk
