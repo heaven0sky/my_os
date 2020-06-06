@@ -12,6 +12,31 @@ startup_arch:
     jmp gdt.kernel_code:protected_mode
 USE32
 protected_mode:
+    ; load all the other segments with 32 bit data segments
+    mov eax, gdt.kernel_data
+    mov ds, eax
+    mov es, eax
+    mov fs, eax
+    mov gs, eax
+    mov ss, eax
+
+    mov esp, 0x800000 - 128
+
+    mov eax, gdt.tss
+    ltr ax
+
+    ;rust init
+    mov eax, [kernel_base + 0x18]
+    mov [interrupts.handler], eax
+    mov eax, gdtr
+    mov ebx, idtr
+    mov ecx, tss
+    int 255
+.lp:
+    sti
+    hlt
+    jmp .lp
+
 
 
 gdtr:

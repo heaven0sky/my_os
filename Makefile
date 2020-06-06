@@ -7,13 +7,16 @@ qemu: build/harddrive.bin
 
 FORCE:
 
-# build/libkernel.a: FORCE
+build/libkernel.a: FORCE
+	rustc --crate-type staticlib src/lib.rs -o $@
 
-# build/kernel.bin: build/libkernel.a:
-#	ld -m elf_$(ARCH) -o $@ -T bootloader/x86/kernel.ld -z max-page-size=0x1000 $<
 
-build/harddrive.bin: #build/kernel.bin
-	nasm -f bin -o $@ -D ARCH_$(ARCH) -ibootloader/x86/ bootloader/x86/harddrive.asm
+build/kernel.bin: build/libkernel.a
+	$(ARCH)-elf-ld -m elf_$(ARCH) -o $@ -T bootloader/x86/kernel.ld -z max-page-size=0x1000 $<
+
+
+build/harddrive.bin: build/kernel.bin
+	nasm -f bin -o $@ -D ARCH_$(ARCH) -ibootloader/x86/ -ibuild/ bootloader/x86/harddrive.asm
 
 clean:
 	rm -rf build/*

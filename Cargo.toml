@@ -4,4 +4,12 @@ version = "0.1.0"
 authors = ["heaven0sky <286076057@qq.com>"]
 edition = "2018"
 
-[dependencies]
+[lib]
+crate-type = ["staticlib"]
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+

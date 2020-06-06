@@ -2,7 +2,13 @@
 
 startup_start:  ; 0x7E00
 
-%include "startup-i386.asm"
+%ifdef ARCH_i386
+    %include "startup-i386.asm"
+%endif
+
+%ifdef ARCH_x86_64
+    %include "startup-x86_64.asm"
+%endif
 
 align 512, db 0
 startup_end:
