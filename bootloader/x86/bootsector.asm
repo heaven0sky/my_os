@@ -3,6 +3,8 @@ SECTION .text
 USE16
 
 boot:
+    ; 0x7C00
+    ; 512 = 0x200
     xor ax, ax
     mov ds, ax
     mov es, ax
@@ -25,6 +27,18 @@ boot:
     mov cx, (startup_end - startup_start) / 512
     xor dx, dx
     call load
+
+    ; load some sectors from disk to a buffer in memory
+    ; buffer has to be below 1MiB
+    ; IN
+    ;   ax: start sector
+    ;   bx: offset of buffer
+    ;   cx: number of sectors (512 Bytes each)
+    ;   dx: segment of buffer
+    ; CLOBBER
+    ;   ax, bx, cx, dx, si
+    ; if that is done increase buffer_size_sectors in startup-common to that (max 0x80000 - startup_end)
+
 
     mov si, finished
     call print
@@ -100,7 +114,7 @@ error:
 
 name: db "Redox Loader", 0
 loading: db "Load ", 0
-errored: db "Could nt read disk", 0
+errored: db "Could not read disk", 0
 finished: db "Finished Loading", 0
 line: db 13, 10, 0
 disk: db 0

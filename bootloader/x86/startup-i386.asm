@@ -15,7 +15,7 @@ protected_mode:
 
 
 gdtr:
-    dw gtd.end + 1
+    dw gdt.end + 1
     dd gdt
 
 gdt:
@@ -121,6 +121,4 @@ tss:
     iend
 .end:
 
-.end equ $ - gdt
-
-.end
+%include "interrupts-i386.asm"
