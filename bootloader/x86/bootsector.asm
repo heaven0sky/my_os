@@ -114,6 +114,7 @@ DAPACK:
 .addr:  dd 0 ; put the lba to read in this spot
         dd 0 ; more storage bytes only for big lba's ( > 4 bytes )
 
-times 510-($-$$) db 0
+times 510-($-$$) db 0  ;$ 标号表示 nasm 编译后当前指令位置
+                       ;$$ 标号表示当前 section 起始位置
 db 0x55
 db 0xaa
