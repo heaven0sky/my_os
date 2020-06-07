@@ -1,5 +1,5 @@
 [package]
-name = "myos"
+name = "my_os"
 version = "0.1.0"
 authors = ["heaven0sky <286076057@qq.com>"]
 edition = "2018"

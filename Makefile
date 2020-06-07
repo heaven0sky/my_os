@@ -8,8 +8,8 @@ qemu: build/harddrive.bin
 FORCE:
 
 build/libkernel.a: FORCE
-	rustc --crate-type staticlib src/lib.rs -o $@
-
+	xargo build --target x86_64-unknown-none
+	cp target/x86_64-unknown-none/debug/libmy_os.a $@
 
 build/kernel.bin: build/libkernel.a
 	$(ARCH)-elf-ld -m elf_$(ARCH) -o $@ -T bootloader/x86/kernel.ld -z max-page-size=0x1000 $<
