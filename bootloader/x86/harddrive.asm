@@ -14,6 +14,7 @@ align 512, db 0
 startup_end:
 
 kernel_file:  ; 0x100000 1MB
+    incbin "kernel.bin"
     align 512, db 0
 .end:
 

@@ -111,7 +111,6 @@ error:
 
 %include "print16.asm"
 
-
 name: db "Redox Loader", 0
 loading: db "Load ", 0
 errored: db "Could not read disk", 0
