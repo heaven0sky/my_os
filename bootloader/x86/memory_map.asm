@@ -10,7 +10,7 @@ memory_map:
     mov di, .start
     mov ecx, .length / 4 ; moving 4 Bytes at once
     cld
-    rep stosd
+    rep stosd  ; .start 到 .end全部数据置零  stosd 存eax 数据到 [di]
 
     mov di, .start
     mov edx, 0x534D4150
