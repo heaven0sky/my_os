@@ -13,6 +13,9 @@ startup_arch:
     cld
     rep stosd
 
+    ; 0 - 3000H  12K, 置零
+    ; 每个段 8个字节
+
     xor edi, edi
     ;Link first PML4 to PDP
     mov DWORD [es:edi], 0x71000 | 1 << 1 | 1
