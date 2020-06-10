@@ -1,6 +1,7 @@
 %include "startup-common.asm"
 
 startup_arch:
+
     cli
     ; setting up Page Tables
     ; Identity Mapping first GB

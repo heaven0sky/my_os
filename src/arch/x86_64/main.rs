@@ -2,7 +2,7 @@
 #[no_mangle]
 
 static HELLO: &[u8] = b"Hello World!";
-pub extern fn main() {
+pub extern fn kmain() {
     let vga_buffer = 0xb8000 as *mut u8;
 
     for (i, &byte) in HELLO.iter().enumerate() {
