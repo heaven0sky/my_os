@@ -1,17 +1,10 @@
 #[naked]
 #[no_mangle]
 
-static HELLO: &[u8] = b"Hello World!";
-pub extern fn kmain() {
-    let vga_buffer = 0xb8000 as *mut u8;
+#[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+pub unsafe extern fn kmain() {
+    llvm_asm!("xchg bx, bx" : : : : "intel", "volatile");
 
-    for (i, &byte) in HELLO.iter().enumerate() {
-        unsafe {
-            *vga_buffer.offset(i as isize * 2) = byte;
-            *vga_buffer.offset(i as isize * 2 + 1) = 0xb;
-        }
-    }
-
-    loop {}
+    loop{}
 }
 

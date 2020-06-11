@@ -1,4 +1,4 @@
-#![feature(asm)]
+#![feature(llvm_asm)]
 #![feature(lang_items)]
 #![feature(naked_functions)]
 #![no_std]
