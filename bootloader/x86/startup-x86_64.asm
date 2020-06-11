@@ -5,7 +5,7 @@ startup_arch:
     cli
     ; setting up Page Tables
     ; Identity Mapping first GB
-    mov ax, 0x7000
+    mov ax, 0x7000 ;
     mov es, ax
 
     xor edi, edi
@@ -14,7 +14,7 @@ startup_arch:
     cld
     rep stosd
 
-    ; 0 - 3000H  12K, 置零
+    ; 70000 - 73000H  12K, 置零
     ; 每个段 8个字节
 
     xor edi, edi
