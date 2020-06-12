@@ -25,7 +25,7 @@ startup_arch:
     mov DWORD [es:edi], 0x72000 | 1 << 1 | 1
     add edi, 0x1000
     ;Link all PD's (512 per PDP, 2MB each)y
-    mov ebx, 1 << 7 | 1 << 1 | 1
+    mov ebx, 1 << 7 | 1 << 1 | 1  ;  10000011
     mov ecx, 512
 .setpd:
     mov [es:edi], ebx
